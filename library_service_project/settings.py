@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "djmoney",
     "books",
     "user",
-    "borrowings"
+    "borrowings",
+    "drf_spectacular"
 ]
 
 MIDDLEWARE = [
@@ -135,9 +136,23 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=123456789),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZE"
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Library Service Project",
+    "DESCRIPTION": "API service for a library management written on DRF",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "defaultModelRendering": True,
+        "defaultModelExpandDepth": 2,
+        "defaultModelsExpandDepth": 2,
+    },
 }
