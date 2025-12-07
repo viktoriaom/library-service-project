@@ -1,6 +1,7 @@
 from django.utils import timezone
 
 from django.db import transaction
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, generics, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -41,6 +42,24 @@ class BorrowingsReadSet(viewsets.ReadOnlyModelViewSet):
                 queryset = queryset.filter(actual_return_date__isnull=False)
 
         return queryset.select_related("book", "user")
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="user_id",
+                type={"type": "int"},
+                description="Filter for admins by user_id (ex. ?user_id=1)",
+            ),
+            OpenApiParameter(
+                name="is_active",
+                type={"type": "str"},
+                description="Filter only active borrowings (ex. ?is_active=true)",
+            )
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        """Get list of performances."""
+        return super().list(request, *args, **kwargs)
 
 
 class BorrowingsCreateView(generics.CreateAPIView):
