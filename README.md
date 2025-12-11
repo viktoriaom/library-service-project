@@ -22,6 +22,16 @@ The API will be available at http://127.0.0.1:8000/
 Load test data into db:  
 python manage.py loaddata library_fixture.json
 
+## Run with Docker and PostgreSQL
+docker-compose build  
+docker-compose up  
+
+The API will be available at `http://127.0.0.1:8002/
+
+#### Optional
+Load test data into db:  
+docker-compose exec library python manage.py loaddata library_fixture.json
+
 ## Getting Access
 * register a new user via api/user/register  
 * get access token via api/user/token  
@@ -54,7 +64,9 @@ For testing purposes only:
 * Django REST Framework [https://www.django-rest-framework.org] - API toolkit  
 * SQLite [https://sqlite.org] - Database  
 * JWT [https://www.jwt.io] - Authentication
-* drf-spectacular [https://drf-spectacular.readthedocs.io] - API documentation  
+* drf-spectacular [https://drf-spectacular.readthedocs.io] - API documentation 
+* Docker [https://www.docker.com] - Containerization 
+* PostgreSQL [https://www.postgresql.org] - Database  
 
 
 ## Usage Tips
